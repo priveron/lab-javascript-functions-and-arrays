@@ -167,6 +167,35 @@ function greatestProduct(matrix) {
   return nb;
 }
 
+function greatestProductOfDiagonals(matrix) {
+  let nb = 0;
+
+  for (let j = matrix.length - 4, i = 0; i <= matrix[0].length - 4; j--) {
+    if (j < 0) {
+      j = 0;
+      i++;
+    }
+    for (let x = 0; x <= matrix.length - j - 4; x++) {
+      let tmp = matrix[j][i] * matrix[j + 1][i + 1] * matrix[j + 2][i + 2] * matrix[j + 3][i + 3];
+      if (nb < tmp)
+        nb = tmp;
+    }
+  }
+  for (let j = 0, i = 3; j < matrix.length - 4; i++) {
+    if (i > matrix[0].length - 1) {
+      i = matrix[0].length - 1;
+      j++;
+    }
+    for (let x = 0; x <= i - 3; x++) {
+      let tmp = matrix[j][i] * matrix[j + 1][i - 1] * matrix[j + 2][i - 2] * matrix[j + 3][i - 3];
+      if (nb < tmp)
+        nb = tmp;
+    }
+  }
+  return nb;
+}
+
+greatestProductOfDiagonals(matrix);
 
 
 
@@ -184,6 +213,7 @@ if (typeof module !== 'undefined') {
     uniquifyArray,
     doesWordExist,
     howManyTimes,
-    greatestProduct
+    greatestProduct,
+    greatestProductOfDiagonals
   };
 }
